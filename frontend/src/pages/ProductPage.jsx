@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 
-const ProductPage = ({}) => {
+const ProductPage = () => {
   const [product, setProduct] = useState({});
 
   const params = useParams();
@@ -15,7 +15,7 @@ const ProductPage = ({}) => {
       setProduct(data);
     };
     fetchProduct();
-  }, []);
+  }, [params]);
 
   return (
     <>
