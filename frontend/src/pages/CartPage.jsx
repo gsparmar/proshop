@@ -11,7 +11,7 @@ import {
   Form,
 } from 'react-bootstrap';
 import Message from '../components/Message';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const CartPage = () => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log('removed');
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -80,7 +80,7 @@ const CartPage = () => {
                     <Button
                       type='button'
                       variant='light'
-                      onclick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(item.product)}
                     >
                       <i className='fas fa-trash' />
                     </Button>
