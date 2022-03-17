@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { createOrder } from '../actions/orderActions';
 
 const PlaceOrderPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
 
   const addDecimals = (num) => {
@@ -28,8 +30,28 @@ const PlaceOrderPage = () => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { success, order, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line
+  }, [navigate, success]);
+
   const placeOrderHandler = () => {
-    console.log('placed order');
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        shippingPrice: cart.shippingPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
   return (
     <div>
@@ -54,7 +76,7 @@ const PlaceOrderPage = () => {
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.length == 0 ? (
+              {cart.cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
@@ -121,6 +143,10 @@ const PlaceOrderPage = () => {
                 </Row>
               </ListGroup.Item>
 
+              <ListGroup.Item>
+                {/*  orderCreate error message  */}
+                {error && <Message variant='danger'>{error}</Message>}
+              </ListGroup.Item>
               <ListGroup.Item>
                 <div className='d-grid gap-2'>
                   <Button
