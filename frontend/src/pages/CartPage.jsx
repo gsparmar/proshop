@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import { getUserDetails } from '../actions/userActions';
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const CartPage = () => {
   // pulling qty from url
   const qty = new URLSearchParams(location.search).get('qty');
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -37,7 +41,13 @@ const CartPage = () => {
   };
 
   const checkoutHandler = () => {
-    navigate('/login');
+    // if no user info redirect to login page
+    // else redirect to shipping page
+    if (!userInfo) {
+      navigate('/login');
+    } else {
+      navigate('/shipping');
+    }
   };
   return (
     <Row>
