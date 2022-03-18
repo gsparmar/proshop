@@ -12,6 +12,8 @@ import ProfilePage from './pages/ProfilePage';
 import ShippingPage from './pages/ShippingPage';
 import PaymentPage from './pages/PaymentPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
+import OrderPage from './pages/OrderPage';
+
 const App = () => {
   return (
     <Router>
@@ -20,6 +22,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path='/payment' element={<PaymentPage />} />
+            <Route path='/order/:id' element={<OrderPage />} />
             <Route path='/placeorder' element={<PlaceOrderPage />} />
             <Route path='/register' element={<RegisterPage />} />
             <Route path='/shipping' element={<ShippingPage />} />
