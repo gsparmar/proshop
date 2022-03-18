@@ -17,8 +17,10 @@ const OrderPage = () => {
   const { order, error, loading } = orderDetails;
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [orderId, order, dispatch]);
 
   if (!loading) {
     const addDecimals = (num) => {
