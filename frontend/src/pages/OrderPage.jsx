@@ -60,7 +60,7 @@ const OrderPage = () => {
                   Delivered on {order.deliveredAt}
                 </Message>
               ) : (
-                <Message variant='danger'>Not Delivereds </Message>
+                <Message variant='danger'>Not Delivered </Message>
               )}
             </ListGroup.Item>
 
