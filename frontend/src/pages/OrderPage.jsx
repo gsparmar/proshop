@@ -8,6 +8,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getOrderDetails, payOrder } from '../actions/orderActions';
 import { ORDER_PAY_RESET } from '../constants/orderConstants';
+import { CART_RESET_ITEM } from '../constants/cartConstants';
 
 const OrderPage = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const OrderPage = () => {
       script.async = true;
       script.onload = () => {
         setSdkReady(true);
+        localStorage.setItem('cartItems', []);
+        dispatch({ type: CART_RESET_ITEM });
       };
       document.body.appendChild(script);
     };
