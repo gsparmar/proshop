@@ -44,6 +44,7 @@ const App = () => {
               element={<ProductEditPage />}
             />
             <Route path='/admin/orderlist' element={<OrderListPage />} />
+            <Route path='/search/:keyword' element={<Home />} />
             <Route path='/' element={<Home />} exact />
           </Routes>
         </Container>
