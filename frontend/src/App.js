@@ -38,13 +38,28 @@ const App = () => {
             <Route path='/cart' element={<CartPage />} />
             <Route path='/admin/userlist' element={<UserListPage />} />
             <Route path='/admin/user/:id/edit' element={<UserEditPage />} />
-            <Route path='/admin/productlist' element={<ProductListPage />} />
+            <Route
+              path='/admin/productlist'
+              element={<ProductListPage />}
+              exact
+            />
+            <Route
+              path='/admin/productlist/:pageNumber'
+              element={<ProductListPage />}
+              exact
+            />
             <Route
               path='/admin/product/:id/edit'
               element={<ProductEditPage />}
             />
             <Route path='/admin/orderlist' element={<OrderListPage />} />
-            <Route path='/search/:keyword' element={<Home />} />
+            <Route path='/search/:keyword' element={<Home />} exact />
+            <Route
+              path='/search/:keyword/page/:pageNumber'
+              element={<Home />}
+              exact
+            />
+            <Route path='/page/:pageNumber' element={<Home />} exact />
             <Route path='/' element={<Home />} exact />
           </Routes>
         </Container>
