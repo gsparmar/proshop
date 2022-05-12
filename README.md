@@ -2,14 +2,15 @@
 - MERN Stack 
 - Integrated with PayPal sandbox account
 - isAdmin support for users, products and orders
+- Admin users will be able to modify products and users
 
 Deployed via Heroku:
-URL: https://proshopappgp.herokuapp.com/
-test credentials: 
-non admin login: 
-username: john@example.com
-password: 123456
+ - URL: https://proshopappgp.herokuapp.com/
 
-Admin users:
-Adds ability to mark completed orders
-Modify products and users
+Test credentials: 
+ - non admin login: 
+ - username: john@example.com
+ - password: 123456
+
+
+
